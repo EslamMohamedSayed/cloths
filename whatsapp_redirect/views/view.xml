@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="whatsapp_cloth_request_details" model="ir.ui.view">
+            <field name="name">cloth.request.details.form</field>
+            <field name="model">cloth.request.details</field>
+            <field name="inherit_id" ref="cloth_tailor_management_odoo.cloth_request_details_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_start" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_sale_quotations_new']" position="before">
+                    <button name="send_msg" string="Whatsapp" type="object" class="oe_stat_button" icon="fa-whatsapp" attrs="{'invisible':[('is_start','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="whatsapp_mrp_production" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_unbuild']" position="before">
+                    <button name="send_msg" string="Whatsapp" type="object" class="oe_stat_button" icon="fa-whatsapp" attrs="{'invisible':[('state','!=','done')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
