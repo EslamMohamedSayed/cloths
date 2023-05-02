@@ -17,6 +17,8 @@ class ClothRequestDetails(models.Model):
                 rec.is_start = False
 
     def send_msg(self):
+
+        message='Our dear customer, %s, has started executing your cloth. A message will be sent when the total amount is %s, the paid amount is %s, and the reminder is %s.'%(self.partner_id.name,str(self.total),str(self.deposit),str(self.reminder))
         return {'type': 'ir.actions.act_window',
                 'name': _('Whatsapp Message'),
                 'res_model': 'whatsapp.message.wizard',
@@ -24,7 +26,7 @@ class ClothRequestDetails(models.Model):
                 'view_mode': 'form',
                 'view_type': 'form',
                 'context': {'default_user_id': self.partner_id.id,
-                            'default_message': 'عملينا العزبز يرجي العلم بانه تم البدأ في تنفيذ الثوب الخاص بك وسيتم ارسال رسالة اخري عند الانتهاء'},
+                            'default_message': message},
                 }
 
 
